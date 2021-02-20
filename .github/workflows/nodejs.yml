@@ -1,0 +1,21 @@
+name: Jest Tests
+
+on: [push]
+jobs:
+  container-job: 
+    runs-on: ubuntu-latest
+    container: node:latest
+
+    services:
+      redis:
+        image: redis:latest
+        ports: 
+        - 6379:6379
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: npm ci
+    - run: npm test
+      env:
+        CI: true
+        REDIS_URL:  redis://redis:6379
