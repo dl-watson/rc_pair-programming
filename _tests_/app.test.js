@@ -20,5 +20,11 @@ describe("pair-programming routes", () => {
       .catch();
   });
 
-  it("tests that a GET to the /set endpoint works as intended", () => {});
+  it("tests that a GET to the /set endpoint works as intended", () => {
+    return request(app)
+      .get("/set?anotherkey=anotherval")
+      .then((res) => {
+        expect(res.body).toEqual({ status: "OK" });
+      });
+  });
 });
